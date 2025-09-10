@@ -131,7 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="information.cpp" />
     <ClCompile Include="Team2OpenDataApp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="information.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
