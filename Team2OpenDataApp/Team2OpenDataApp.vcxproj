@@ -131,11 +131,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\DataBuffer.cpp" />
     <ClCompile Include="src\information.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Team2OpenDataApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DataBuffer.h" />
     <ClInclude Include="src\information.h" />
     <ClInclude Include="src\System.h" />
   </ItemGroup>
