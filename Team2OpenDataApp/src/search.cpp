@@ -2,23 +2,23 @@
 //　データが入っている関数からデータを引っ張ってくる
 //　両方のデータを比較する
 //　一致すれば出す
-#include "Prefectures.h"
+#include "Search.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
-bool Prefectures::Init() {
+bool Search::Init() {
 	count = 0;
 
 	return true;
 }
 
-void Prefectures::Updat() {
+void Search::Updat() {
 
 
 }
 
-void Prefectures::FindByName()
+void Search::FindByName()
 {
 
 }
