@@ -59,7 +59,9 @@ void processSearchListDisplay() {
 	int data_key_idx = 0;//データキーのインデックス番号
 	std::cin >> data_key_idx;//番号を入力
 	//入力が不正な場合、再度入力を促す
-	while (data_key_idx > data_keys.size()) {
+	while ((data_key_idx > data_keys.size() || data_key_idx < 1) || std::cin.fail()) {
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "不正な入力です。正しい値を入力してください。\n\n";
 		ShowSearchListInformation();//案内表示
 		std::cin >> data_key_idx;//番号を入力
