@@ -9,11 +9,24 @@
 int main()
 {
 	SetConsoleOutputCP(CP_UTF8);  // 出力コードページをUTF-8に変更
-	std::u8string str = u8"こんにちは、世界";
-	printUtf8(str);
 	DataBuffer::Init();//データバッファを初期化
-
-	ShowSearchInformation();//案内の表示
+	while (true) {
+		ShowOptionInformation();//オプションの案内表示
+		int option;
+		std::cin >> option;
+		switch (option) {
+		case 1:
+			//検索
+			break;
+		case 2:
+			processSearchListDisplay();//一覧表示
+			break;
+		case 3:
+			//終了
+			return 0;
+			break;
+		}
+	}
 
 	system("pause");
 	return 0;

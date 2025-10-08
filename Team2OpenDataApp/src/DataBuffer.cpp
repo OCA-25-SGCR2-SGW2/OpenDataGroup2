@@ -8,7 +8,9 @@
 #include <fstream>
 #include <sstream>
 #include "DataBuffer.h"
-std::vector<std::unordered_map<std::string, std::u8string>> restrant_data_ = {};//staticなのでここで初期化
+//staticメンバ変数を初期化
+std::vector<std::unordered_map<std::string, std::u8string>> DataBuffer::restaurant__data_ = {};
+std::vector<std::string> DataBuffer::data_keys_ = { "store_name", "prefecture", "city", "street", "building", "station", "phone_number", "genre", "url" };
 //-----------------------------------------------------------------------------
 //	初期化関数
 //-----------------------------------------------------------------------------
@@ -30,35 +32,35 @@ void DataBuffer::Init() {
 			//カウントごとに
 			switch (loop_count) {
 			case 1://店舗名
-				curr_line_data["store_name"] = std::u8string(item.begin(), item.end());//店舗名
+				curr_line_data[data_keys_[0]] = std::u8string(item.begin(), item.end());//店舗名
 				break;
 			case 4:
-				curr_line_data["prefecture"] = std::u8string(item.begin(), item.end());//県
+				curr_line_data[data_keys_[1]] = std::u8string(item.begin(), item.end());//県
 				break;
 			case 5:
-				curr_line_data["city"] = std::u8string(item.begin(), item.end());//市区町村
+				curr_line_data[data_keys_[2]] = std::u8string(item.begin(), item.end());//市区町村
 				break;
 			case 6:
-				curr_line_data["street"] = std::u8string(item.begin(), item.end());//番地
+				curr_line_data[data_keys_[3]] = std::u8string(item.begin(), item.end());//番地
 				break;
 			case 7:
-				curr_line_data["building"] = std::u8string(item.begin(), item.end());//建物名
+				curr_line_data[data_keys_[4]] = std::u8string(item.begin(), item.end());//建物名
 				break;
 			case 8:
-				curr_line_data["station"] = std::u8string(item.begin(), item.end());//駅名
+				curr_line_data[data_keys_[5]] = std::u8string(item.begin(), item.end());//駅名
 				break;
 			case 9:
-				curr_line_data["phone_number"] = std::u8string(item.begin(), item.end());//電話番号
+				curr_line_data[data_keys_[6]] = std::u8string(item.begin(), item.end());//電話番号
 				break;
 			case 10:
-				curr_line_data["genre"] = std::u8string(item.begin(), item.end());//ジャンル
+				curr_line_data[data_keys_[7]] = std::u8string(item.begin(), item.end());//ジャンル
 				break;
 			case 15:
-				curr_line_data["url"] = std::u8string(item.begin(), item.end());//URL
+				curr_line_data[data_keys_[8]] = std::u8string(item.begin(), item.end());//URL
 				break;
 			}
 		}
-		restrant_data_.push_back(curr_line_data);//バッファに格納
+		restaurant__data_.push_back(curr_line_data);//バッファに格納
 	}
 
 	file.close(); // ファイルを閉じる
