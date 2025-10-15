@@ -22,6 +22,7 @@ int main()
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "不正な入力です。正しい値を入力してください。\n\n";
 			ShowInformation("option_info");//案内表示
+			std::cin >> option;
 		}
 		switch (option) {
 		case 1:

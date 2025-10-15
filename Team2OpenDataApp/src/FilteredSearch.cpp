@@ -34,8 +34,7 @@ void processFilteredSearch() {
 			std::u8string error_message = u8"無効なオプションです。1から9の数字を入力してください。\n";
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			printUtf8(error_message);
-			printUtf8(u8"--------------------\n\n");
-			return;
+			std::cin >> option;
 		}
 		//対応するデータキーを取得
 		std::string selected_key = data_keys[option - 1];
