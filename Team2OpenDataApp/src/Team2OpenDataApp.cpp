@@ -14,14 +14,14 @@ int main()
 	SetConsoleCP(CP_UTF8);		// 入力コードページをUTF-8に変更
 	DataBuffer::Init();//データバッファを初期化
 	while (true) {
-		ShowOptionInformation();//オプションの案内表示
+		ShowInformation("option_info");//案内表示
 		int option;
 		std::cin >> option;
 		while ((option > 4 || option < 1) || std::cin.fail()) {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "不正な入力です。正しい値を入力してください。\n\n";
-			ShowOptionInformation();//オプションの案内表示
+			ShowInformation("option_info");//案内表示
 		}
 		switch (option) {
 		case 1:
