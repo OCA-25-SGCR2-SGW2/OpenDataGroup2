@@ -18,7 +18,9 @@
 void ShowInformation(const std::string& key) {
 	auto it = INFORMATION_MESSAGES.find(key);
 	if (it != INFORMATION_MESSAGES.end()) {
+		printUtf8(u8"--------------------");
 		printUtf8(it->second);
+		printUtf8(u8"--------------------\n");
 	}
 	else {
 		//開発者向けのエラーメッセージ
