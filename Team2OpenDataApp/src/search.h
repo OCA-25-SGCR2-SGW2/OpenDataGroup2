@@ -1,10 +1,11 @@
 #pragma once
 #include <string>
 
+//通常検索を行うクラス
 class Search {
 private:
 
-	std::string name;
+
 
 	int count;
 
@@ -13,9 +14,8 @@ public:
 
 	void Updat();
 
-	void FindByName();
+	void SearchiInput();
 
-
-
+	void DetailedInput(int number);
 
 };
