@@ -10,9 +10,6 @@
 #include "System.h"
 #include "information.h"
 #include "DataBuffer.h"
-#include <cereal/archives/json.hpp>       // JSON形式のアーカイブ
-#include <cereal/types/string.hpp>        // string型のシリアライズをサポート
-#include <cereal/types/vector.hpp>        // vector型のシリアライズをサポート
 //----------------------------------------------------------------------------------------
 //	案内を表示する関数
 //	オプションの案内を表示する関数

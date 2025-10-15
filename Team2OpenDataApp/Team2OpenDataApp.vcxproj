@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\FavoritesList.cpp" />
     <ClCompile Include="src\FilteredSearch.cpp" />
     <ClCompile Include="src\DataBuffer.cpp" />
     <ClCompile Include="src\information.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="src\Team2OpenDataApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\FavoritesList.h" />
     <ClInclude Include="src\FilteredSearch.h" />
     <ClInclude Include="src\DataBuffer.h" />
     <ClInclude Include="src\information.h" />
