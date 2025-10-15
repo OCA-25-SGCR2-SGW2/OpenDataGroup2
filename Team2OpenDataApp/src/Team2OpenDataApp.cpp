@@ -1,3 +1,4 @@
+#define NOMINMAX // これを定義するとwindows.hでmin,maxマクロが定義されない、std::numeric_limits<std::streamsize>::max()を使用するので、このマクロは定義しない。
 #include <windows.h>
 #include <iostream>
 #include <string>
@@ -14,6 +15,12 @@ int main()
 		ShowOptionInformation();//オプションの案内表示
 		int option;
 		std::cin >> option;
+		while ((option > 3 || option < 1) || std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "不正な入力です。正しい値を入力してください。\n\n";
+			ShowOptionInformation();//オプションの案内表示
+		}
 		switch (option) {
 		case 1:
 			//検索
