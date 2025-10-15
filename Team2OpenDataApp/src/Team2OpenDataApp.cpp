@@ -7,12 +7,14 @@
 #include "DataBuffer.h"
 #include "information.h"
 #include "FilteredSearch.h"
+#include "search.h"
 
 int main()
 {
 	SetConsoleOutputCP(CP_UTF8);  // 出力コードページをUTF-8に変更
 	SetConsoleCP(CP_UTF8);		// 入力コードページをUTF-8に変更
 	DataBuffer::Init();//データバッファを初期化
+	Search search;//通常検索クラスのインスタンスを生成
 	while (true) {
 		ShowInformation("option_info");//案内表示
 		int option;
@@ -27,6 +29,7 @@ int main()
 		switch (option) {
 		case 1:
 			//検索
+			search.Updat();//通常検索の更新
 			break;
 		case 2:
 			processSearchListDisplay();//一覧表示
