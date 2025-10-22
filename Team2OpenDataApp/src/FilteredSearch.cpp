@@ -30,9 +30,10 @@ void processFilteredSearch() {
 			break;
 		}
 		//例外処理
-		if ((option < 1 || option > 9) || std::cin.fail()) {
-			std::u8string error_message = u8"無効なオプションです。1から9の数字を入力してください。\n";
+		while ((option < 1 || option > 9) || std::cin.fail()) {
+			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::u8string error_message = u8"無効なオプションです。1から9の数字を入力してください。\n";
 			printUtf8(error_message);
 			std::cin >> option;
 		}
@@ -63,6 +64,7 @@ void processFilteredSearch() {
 		}
 		else {
 			std::u8string results_message = std::u8string(reinterpret_cast<const char8_t*>(std::to_string(filtered_data.size()).c_str())) + u8"件のデータがヒットしました。\n";
+			printUtf8(results_message);
 			for (const auto& entry : filtered_data) {
 				printUtf8(u8"--------------------\n");
 				for (const auto& [key, value] : entry) {

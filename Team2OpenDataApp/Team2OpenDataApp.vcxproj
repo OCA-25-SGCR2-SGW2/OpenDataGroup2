@@ -106,6 +106,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalOptions>/source-charset:utf-8 /execution-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir)opensource\cereal\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\FavoritesList.cpp" />
     <ClCompile Include="src\FilteredSearch.cpp" />
     <ClCompile Include="src\DataBuffer.cpp" />
     <ClCompile Include="src\information.cpp" />
@@ -139,6 +141,7 @@
     <ClCompile Include="src\Team2OpenDataApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\FavoritesList.h" />
     <ClInclude Include="src\FilteredSearch.h" />
     <ClInclude Include="src\DataBuffer.h" />
     <ClInclude Include="src\information.h" />
