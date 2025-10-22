@@ -63,6 +63,7 @@ void processFilteredSearch() {
 		}
 		else {
 			std::u8string results_message = std::u8string(reinterpret_cast<const char8_t*>(std::to_string(filtered_data.size()).c_str())) + u8"件のデータがヒットしました。\n";
+			printUtf8(results_message);
 			for (const auto& entry : filtered_data) {
 				printUtf8(u8"--------------------\n");
 				for (const auto& [key, value] : entry) {

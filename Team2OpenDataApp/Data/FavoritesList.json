@@ -1,0 +1,44 @@
+{
+    "value0": {
+        "favorites_data_": [
+            [
+                {
+                    "key": "store_name",
+                    "value": "新福菜館守口店"
+                },
+                {
+                    "key": "genre",
+                    "value": "中華麺"
+                },
+                {
+                    "key": "prefecture",
+                    "value": "大阪府"
+                },
+                {
+                    "key": "street",
+                    "value": "1-2-12"
+                },
+                {
+                    "key": "url",
+                    "value": ""
+                },
+                {
+                    "key": "city",
+                    "value": "守口市京阪本通"
+                },
+                {
+                    "key": "building",
+                    "value": ""
+                },
+                {
+                    "key": "station",
+                    "value": "太子橋今市駅"
+                },
+                {
+                    "key": "phone_number",
+                    "value": "0669911755"
+                }
+            ]
+        ]
+    }
+}
