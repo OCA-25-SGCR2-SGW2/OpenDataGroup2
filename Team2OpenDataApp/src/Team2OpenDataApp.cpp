@@ -9,6 +9,8 @@
 #include <cereal/types/unordered_map.hpp>   // unordered_map型のシリアライズをサポート
 #include "System.h"
 #include "DataBuffer.h"
+#include "PopulationData.h"
+#include "PopulationAnalysis.h"
 #include "information.h"
 #include "FilteredSearch.h"
 #include "FavoritesList.h"
@@ -19,6 +21,7 @@ int main()
 	SetConsoleOutputCP(CP_UTF8);  // 出力コードページをUTF-8に変更
 	SetConsoleCP(CP_UTF8);		  // 入力コードページをUTF-8に変更
 	DataBuffer::Init();//データバッファを初期化
+	PopulationData::Init();//人口データを初期化
 	//お気に入りリストの宣言
 	FavoritesList favavorites_list;
 	{
@@ -34,7 +37,7 @@ int main()
 		ShowInformation("option_info");//案内表示
 		int option;
 		std::cin >> option;
-		while ((option > 6 || option < 1) || std::cin.fail()) {
+		while ((option > 7 || option < 1) || std::cin.fail()) {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "不正な入力です。正しい値を入力してください。\n\n";
@@ -106,7 +109,12 @@ int main()
 			//ブックマークの表示
 			favavorites_list.ShowAllFavorites();	//お気に入りを表示
 			break;
-		case 6:
+      case 6:
+        //人口比率分析
+			PopulationAnalysis::DisplayPopulationRatioAnalysis();
+			break;
+        break;
+		case 7:
 			//終了
 			return 0;
 			break;
