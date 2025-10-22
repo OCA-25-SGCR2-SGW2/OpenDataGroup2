@@ -9,6 +9,11 @@ private:
 	//
 	int count;
 
+	bool with_data;
+	
+	std::string str_search_term;
+
+
 	std::string data[141]{
 		"北海道","Hokkaido","ほっかいどう","青森県","Aomoriken ","あおもりけん","岩手県","Iwateken","いわてけん",
 		"宮城県","Miyagiken","みやぎけん","秋田県","Akitaken","あきたけん","山形県","Yamagataken","やまがたけん",
@@ -49,5 +54,8 @@ public:
 	void SearchiInput();
 	//
 	void DetailedInput(int number);
+
+	void Character_Classification(int number);
+
 
 };

@@ -11,12 +11,12 @@
 #include <set>
 using namespace std;
 
-
-
-
 bool Search::Init() {
 	count = 0;
-	
+	with_data = false;
+	str_search_term = "";
+
+
 	return true;
 }
 std::string ToString(const std::u8string& u8str) {
@@ -61,31 +61,15 @@ void Search::DetailedInput(int number)//検索内容を聞いた後に細かい�
 	//対応するデータキーを取得
 	std::string selected_key = data_keys[number - 1];
 	//ユーザーに検索文字列の入力を促す
-	std::u8string prompt_message = u8"検索したい文字列を入力してください:\n";
-	printUtf8(prompt_message);
 
-	std::string str_search_term;
-
-	if (number == 2)
+	
+	
+	Character_Classification(number);
+	while (!with_data)
 	{
-		std::string str;
-		std::cin >> str;
-
-		for (int i = 0; i < 141; i++)
-		{
-			if (str == data[i])
-			{
-				int a = i / 3;
-
-				str_search_term = prefecture[a];
-			}
-		}
-
+		std::cout << "不正な入力です。正しい値を入力してください。\n";
+		Character_Classification(number);
 	}
-	else {
-		std::cin >> str_search_term;
-	}
-
 
 
 	//std::cin >> str_search_term;
@@ -117,5 +101,35 @@ void Search::DetailedInput(int number)//検索内容を聞いた後に細かい�
 			}
 		}
 		printUtf8(u8"--------------------\n\n");
+	}
+}
+
+void Search::Character_Classification(int number)
+{
+	if (number == 2)
+	{
+		std::cout << "漢字またはひらがなまたはカタカナで入力してください。(例：大阪府) \n\n";
+		std::string str;
+		std::cin >> str;
+
+		for (int i = 0; i < 141; i++)
+		{
+			if (str == data[i])
+			{
+				int a = i / 3;
+				str_search_term = prefecture[a];
+				with_data = true;
+				return;
+			}
+			else {
+				with_data = false;
+			}
+		}
+	}
+	else {
+		std::u8string prompt_message = u8"検索したい文字列を入力してください:\n";
+		printUtf8(prompt_message);
+		std::cin >> str_search_term;
+		with_data = true;
 	}
 }
