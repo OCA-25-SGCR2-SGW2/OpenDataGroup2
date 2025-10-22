@@ -4,19 +4,19 @@
             [
                 {
                     "key": "store_name",
-                    "value": "新福菜館守口店"
+                    "value": "ブタキング"
                 },
                 {
                     "key": "genre",
-                    "value": "中華麺"
+                    "value": "ラーメン・つけ麺"
                 },
                 {
                     "key": "prefecture",
-                    "value": "大阪府"
+                    "value": "北海道"
                 },
                 {
                     "key": "street",
-                    "value": "1-2-12"
+                    "value": "大麻中町50"
                 },
                 {
                     "key": "url",
@@ -24,7 +24,7 @@
                 },
                 {
                     "key": "city",
-                    "value": "守口市京阪本通"
+                    "value": "江別市"
                 },
                 {
                     "key": "building",
@@ -32,11 +32,11 @@
                 },
                 {
                     "key": "station",
-                    "value": "太子橋今市駅"
+                    "value": "大麻"
                 },
                 {
                     "key": "phone_number",
-                    "value": "0669911755"
+                    "value": "0113875767"
                 }
             ]
         ]

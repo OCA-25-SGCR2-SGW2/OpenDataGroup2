@@ -34,7 +34,7 @@ int main()
 		ShowInformation("option_info");//案内表示
 		int option;
 		std::cin >> option;
-		while ((option > 5 || option < 1) || std::cin.fail()) {
+		while ((option > 6 || option < 1) || std::cin.fail()) {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "不正な入力です。正しい値を入力してください。\n\n";
@@ -61,11 +61,28 @@ int main()
 			std::cin >> str_store_name;
 			//UTF-8文字列に変換
 			std::u8string u8_store_name(reinterpret_cast<const char8_t*>(str_store_name.c_str()));
-			//データバッファからrestaurantのデータを取得
-			std::vector<std::unordered_map<std::string, std::u8string>> data = DataBuffer::GetRestaurantData();
+			std::vector<std::unordered_map<std::string, std::u8string>> restaurant_data = DataBuffer::GetRestaurantData();			//データバッファからrestaurantのデータを取得
+			std::vector<std::unordered_map<std::string, std::u8string>> fav_data = favavorites_list.GetFavoritesData();				//お気に入りデータを取得
 			bool found = false;//見つかったかどうかのフラグ
-			for (const auto& entry : data) {
+			for (const auto& entry : restaurant_data) {
+				//店名が一致するしていたら
 				if (entry.at("store_name") == u8_store_name) {
+					found = true;//見つかったフラグを立てる
+					//すでにお気に入りに登録されているか確認
+					bool is_already_bookmarked = false;
+					for (const auto& fav : fav_data) {
+						if (fav.at("store_name") == u8_store_name) {
+							std::u8string already_bookmarked_message = u8"指定された店名はすでにブックマークに登録されています。\n";
+							printUtf8(already_bookmarked_message);
+							found = true;
+							is_already_bookmarked = true;
+							break;
+						}
+					}
+					//登録済みなら、ループを抜ける。
+					if (is_already_bookmarked) {
+						break;
+					}
 					//見つかったらお気に入りリストに追加
 					favavorites_list.AddFavorite(entry);
 					//お気に入りリストの保存
@@ -76,7 +93,6 @@ int main()
 					}
 					std::u8string success_message = entry.at("store_name") + u8"をブックマークに追加しました。\n";
 					printUtf8(success_message);
-					found = true;
 					break;
 				}
 			}
