@@ -12,8 +12,11 @@
 using namespace std;
 
 
+
+
 bool Search::Init() {
 	count = 0;
+	
 	return true;
 }
 std::string ToString(const std::u8string& u8str) {
@@ -60,8 +63,32 @@ void Search::DetailedInput(int number)//検索内容を聞いた後に細かい�
 	//ユーザーに検索文字列の入力を促す
 	std::u8string prompt_message = u8"検索したい文字列を入力してください:\n";
 	printUtf8(prompt_message);
+
 	std::string str_search_term;
-	std::cin >> str_search_term;
+
+	if (number == 2)
+	{
+		std::string str;
+		std::cin >> str;
+
+		for (int i = 0; i < 141; i++)
+		{
+			if (str == data[i])
+			{
+				int a = i / 3;
+
+				str_search_term = prefecture[a];
+			}
+		}
+
+	}
+	else {
+		std::cin >> str_search_term;
+	}
+
+
+
+	//std::cin >> str_search_term;
 	//UTF-8文字列に変換
 	std::u8string u8_search_term(reinterpret_cast<const char8_t*>(str_search_term.c_str()));
 	//削除を行うので、逆順イテレータ
