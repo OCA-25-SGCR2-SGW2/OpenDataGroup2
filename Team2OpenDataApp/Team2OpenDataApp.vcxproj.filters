@@ -30,6 +30,7 @@
     <ClCompile Include="src\FilteredSearch.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\FavoritesList.cpp">
     <ClCompile Include="src\search.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -47,6 +48,7 @@
     <ClInclude Include="src\FilteredSearch.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="src\FavoritesList.h">
     <ClInclude Include="src\search.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>

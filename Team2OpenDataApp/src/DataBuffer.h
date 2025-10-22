@@ -22,6 +22,7 @@ public:
 	//! @return	データのキーを格納したバッファ
 	//-----------------------------------------------------------------------------
 	static std::vector<std::string> GetDataKeys() { return data_keys_; };
+
 private:
 	static std::vector<std::unordered_map<std::string, std::u8string>> restaurant__data_;//restaurantのデータを格納したバッファ
 	static std::vector<std::string> data_keys_;//データのキー一覧
