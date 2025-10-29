@@ -11,6 +11,7 @@
 #include <set>
 using namespace std;
 
+//初期化
 bool Search::Init() {
 	count = 0;
 	with_data = false;
@@ -20,6 +21,7 @@ bool Search::Init() {
 	return true;
 }
 
+//更新
 void Search::Updat() {
 
 
@@ -29,6 +31,7 @@ void Search::Updat() {
 	SearchiInput();
 	cout << endl;
 	std::cin >> search_number;//番号を入力
+	//不正な入力の処理
 	while (search_number > data_keys.size()) {
 		std::cout << "不正な入力です。正しい値を入力してください。\n\n";
 		SearchiInput();//案内表示
@@ -39,16 +42,16 @@ void Search::Updat() {
 
 }
 
-
-
-void Search::SearchiInput()	//検索内容を入力させる
+//検索内容を入力させる
+void Search::SearchiInput()
 {
 	cout << "検索したい番号を入力してください:\n1:店名\n2:都道府県\n3:都市名\n4:番地\n5:建物名\n6:駅名\n7:電話番号\n8:飲食のジャンル\n9:サイトのURL";
 	cout << endl;
 
 }
 
-void Search::DetailedInput(int number)//検索内容を聞いた後に細かい事をきく 
+//検索内容を聞いた後に細かい事をきく 
+void Search::DetailedInput(int number)
 {
 	std::vector<std::unordered_map<std::string, std::u8string>> filtered_data = DataBuffer::GetRestaurantData();
 	std::vector<std::string> data_keys = DataBuffer::GetDataKeys();
@@ -60,8 +63,7 @@ void Search::DetailedInput(int number)//検索内容を聞いた後に細かい�
 	std::string selected_key = data_keys[number - 1];
 	//ユーザーに検索文字列の入力を促す
 
-
-
+	//文字分類
 	Character_Classification(number);
 	while (!with_data)
 	{
@@ -81,7 +83,9 @@ void Search::DetailedInput(int number)//検索内容を聞いた後に細かい�
 			filtered_data.erase(filtered_data.begin() + i);
 		}
 	}
-	if (jugemu_count == 48)
+  
+	//じゅげむ検索
+	if (jugemu_count == 4)
 	{
 		cout << endl;
 		cout << "じゅげむ じゅげむ ごこうのすりきれ かいじゃりすいぎょの すいぎょうまつ うんらいまつ ふうらいまつ くうねるところに " << endl;
@@ -115,16 +119,20 @@ void Search::DetailedInput(int number)//検索内容を聞いた後に細かい�
 	}
 }
 
+//文字分類
 void Search::Character_Classification(int number)
 {
+	//都道府県の場合
 	if (number == 2)
 	{
-		std::cout << "漢字またはひらがなまたはカタカナで入力してください。(例：大阪府) \n\n";
+		std::cout << "漢字またはひらがなまたはローマ字で入力してください。(例：大阪府) \n\n";
 		std::string str;
 		std::cin >> str;
 
+		//データと比較
 		for (int i = 0; i < 144; i++)
 		{
+			//一致するかどうか
 			if (str == data[i])
 			{
 				int a = i / 3;
