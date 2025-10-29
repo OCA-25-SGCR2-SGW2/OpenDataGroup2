@@ -6,16 +6,16 @@ class Search {
 private:
 
 
-	//
+	//カウント
 	int count;
-
+	//データがあるかどうか
 	bool with_data;
-
+	//じゅげむカウント
 	int jugemu_count;
-	
+	//検索文字列
 	std::string str_search_term;
 
-
+	//データ
 	std::string data[144]{
 		"北海道","Hokkaido","ほっかいどう","青森県","Aomoriken ","あおもりけん","岩手県","Iwateken","いわてけん",
 		"宮城県","Miyagiken","みやぎけん","秋田県","Akitaken","あきたけん","山形県","Yamagataken","やまがたけん",
@@ -48,15 +48,15 @@ private:
 
 
 public:
-	//
+	//初期化
 	bool Init();
-	//
+	//更新
 	void Updat();
-	//
+	//検索内容入力案内
 	void SearchiInput();
-	//
+	//詳細入力案内
 	void DetailedInput(int number);
-
+	//文字分類
 	void Character_Classification(int number);
 
 
