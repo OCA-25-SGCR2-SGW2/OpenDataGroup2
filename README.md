@@ -28,7 +28,7 @@
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/yourname/Team2OpenDataApp.git
+git clone https://github.com/OCA-25-SGCR2-SGW2/OpenDataGroup2.git
 cd OpenDataGroup2
 
 # ビルド（CMakeを使う場合）
@@ -38,3 +38,16 @@ make
 
 # 実行
 ./Team2OpenDataApp
+
+## 🔽 ダウンロード
+
+最新版の実行ファイルは [Releasesページ](https://github.com/OCA-25-SGCR2-SGW2/OpenDataGroup2/releases) から取得できます。
+
+**最新バージョン：** [v1.0.0](https://github.com/OCA-25-SGCR2-SGW2/OpenDataGroup2/releases)
+
+**含まれるファイル：**
+- `Team2OpenDataApp.exe`（Windows用実行ファイル）
+- `Data/FavoritesList.json`（初期データファイル）
+- `Data/restaurants.txt` (無料の全国レストランのオープンデータ)
+
+※ C++の開発環境は不要です。ダウンロード後すぐに使えます。
