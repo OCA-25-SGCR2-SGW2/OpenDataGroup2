@@ -21,11 +21,6 @@ bool Search::Init() {
 	return true;
 }
 
-//UTF-8文字列を標準出力に表示する関数
-std::string ToString(const std::u8string& u8str) {
-	return std::string(u8str.begin(), u8str.end());
-}
-
 //更新
 void Search::Updat() {
 
@@ -68,7 +63,6 @@ void Search::DetailedInput(int number)
 	std::string selected_key = data_keys[number - 1];
 	//ユーザーに検索文字列の入力を促す
 
-	
 	//文字分類
 	Character_Classification(number);
 	while (!with_data)
@@ -80,7 +74,7 @@ void Search::DetailedInput(int number)
 
 	//std::cin >> str_search_term;
 	//UTF-8文字列に変換
-	std::u8string u8_search_term(reinterpret_cast<const char8_t*>(str_search_term.c_str()));
+	std::u8string u8_search_term = ToU8String(str_search_term);
 	//削除を行うので、逆順イテレータ
 	for (int i = static_cast<int>(filtered_data.size()) - 1; i >= 0; --i) {
 		//文字列が一致するかを検索して
@@ -89,8 +83,9 @@ void Search::DetailedInput(int number)
 			filtered_data.erase(filtered_data.begin() + i);
 		}
 	}
+  
 	//じゅげむ検索
-	if (jugemu_count == 47)
+	if (jugemu_count == 4)
 	{
 		cout << endl;
 		cout << "じゅげむ じゅげむ ごこうのすりきれ かいじゃりすいぎょの すいぎょうまつ うんらいまつ ふうらいまつ くうねるところに " << endl;
@@ -111,7 +106,7 @@ void Search::DetailedInput(int number)
 
 		}
 		else {
-			std::u8string results_message = std::u8string(reinterpret_cast<const char8_t*>(std::to_string(filtered_data.size()).c_str())) + u8"件のデータがヒットしました。\n";
+			std::u8string results_message = ToU8String(std::to_string(filtered_data.size())) + u8"件のデータがヒットしました。\n";
 			for (const auto& entry : filtered_data) {
 				printUtf8(u8"--------------------\n");
 				for (const auto& [key, value] : entry) {

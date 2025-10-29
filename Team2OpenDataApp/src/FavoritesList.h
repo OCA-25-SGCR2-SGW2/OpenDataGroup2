@@ -44,7 +44,7 @@ public:
 			std::unordered_map<std::string, std::string> converted;
 			for (const auto& [key, value] : map) {
 				// std::u8string → std::string に変換（UTF-8として扱う）
-				converted[key] = std::string(reinterpret_cast<const char*>(value.c_str()));
+				converted[key] = ToString(value);
 			}
 			temp.emplace_back(std::move(converted));
 		}
@@ -70,7 +70,7 @@ public:
 			std::unordered_map<std::string, std::u8string> converted;
 			for (const auto& [key, value] : map) {
 				// std::string → std::u8string に変換（UTF-8として扱う）
-				converted[key] = std::u8string(reinterpret_cast<const char8_t*>(value.c_str()));
+				converted[key] = ToU8String(value);
 			}
 			favorites_data_.emplace_back(std::move(converted));
 		}

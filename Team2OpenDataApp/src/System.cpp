@@ -10,5 +10,17 @@
 //! @brief	UTF-8で文字列を表示する関数
 //-----------------------------------------------------------------------------
 void printUtf8(const std::u8string& str) {
-	std::cout << reinterpret_cast<const char*>(str.c_str()) << std::endl;
+	std::cout << ToString(str) << std::endl;
+}
+//-----------------------------------------------------------------------------
+//! @brief	stringをu8stringに変換する関数
+//-----------------------------------------------------------------------------
+std::u8string ToU8String(const std::string& str) {
+	return std::u8string(str.begin(), str.end());
+}
+//-----------------------------------------------------------------------------
+//! @brief	u8stringをstringに変換する関数
+//-----------------------------------------------------------------------------
+std::string ToString(const std::u8string& u8str) {
+	return std::string(u8str.begin(), u8str.end());
 }
