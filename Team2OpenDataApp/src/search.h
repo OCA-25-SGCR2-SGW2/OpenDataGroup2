@@ -10,11 +10,13 @@ private:
 	int count;
 
 	bool with_data;
+
+	int jugemu_count;
 	
 	std::string str_search_term;
 
 
-	std::string data[141]{
+	std::string data[144]{
 		"北海道","Hokkaido","ほっかいどう","青森県","Aomoriken ","あおもりけん","岩手県","Iwateken","いわてけん",
 		"宮城県","Miyagiken","みやぎけん","秋田県","Akitaken","あきたけん","山形県","Yamagataken","やまがたけん",
 		"福島県","Fukushimaken","ふくしまけん","茨城県","Ibarakiken","いばらきけん","栃木県","Tochigiken","とちぎけん",
@@ -30,17 +32,17 @@ private:
 		"香川県","Kagawaken","かがわけん","愛媛県","Ehimeken","えひめけん","高知県","Kochiken","こうちけん",
 		"福岡県","Fukuokaken","ふくおかけん","佐賀県","Sagaken","さがけん","長崎県","Nagasakiken","ながさきけん",
 		"熊本県","Kumamotoken","くまもとけん","大分県","Oitaken","おおいたけん","宮崎県","Miyazakiken","みやざきけん",
-		"鹿児島県","Kagoshimaken","かごしまけん","沖縄県","Okinawaken","おきなわけん"
+		"鹿児島県","Kagoshimaken","かごしまけん","沖縄県","Okinawaken","おきなわけん","寿限無","jugemu","じゅげむ"
 	};
 
 	//県
-	std::string prefecture[47]{
+	std::string prefecture[48]{
 		"北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県",
 		"群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県",
 		"山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府",
 		"兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県",
 		"香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県",
-		"鹿児島県","沖縄県"
+		"鹿児島県","沖縄県","寿限無" 
 	};
 
 

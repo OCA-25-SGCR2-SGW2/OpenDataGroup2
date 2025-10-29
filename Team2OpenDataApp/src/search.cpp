@@ -15,7 +15,7 @@ bool Search::Init() {
 	count = 0;
 	with_data = false;
 	str_search_term = "";
-
+	jugemu_count = 0;
 
 	return true;
 }
@@ -83,24 +83,37 @@ void Search::DetailedInput(int number)//検索内容を聞いた後に細かい�
 			filtered_data.erase(filtered_data.begin() + i);
 		}
 	}
-	//絞り込んだ結果を表示
-	if (filtered_data.empty()) {
-		//該当するデータがない場合のメッセージ
-		std::u8string no_results_message = u8"該当するデータが見つかりませんでした、絞り込み検索を終了します。\n";
-		printUtf8(no_results_message);
-		printUtf8(u8"--------------------\n\n");
-
+	if (jugemu_count = 48)
+	{
+		cout << endl;
+		cout << "じゅげむ じゅげむ ごこうのすりきれ かいじゃりすいぎょの すいぎょうまつ うんらいまつ ふうらいまつ くうねるところに " << endl;
+		cout << "すむところ やぶらこうじの ぶらこうじ パイポパイポ パイポのシューリンガン シューリンガンのグーリンダイ" << endl;
+		cout << "グーリンダイのポンポコピーのポンポコナーの ちょうきゅうめいの ちょうすけ 寿限無 寿限無 五却のすりきれ 海砂利水魚の" << endl;
+		cout << "水行末 雲来末 風来末 食う寝る処に住む処 藪ら柑子の藪柑子 パイポパイポ パイポのシューリンガン " << endl;
+		cout << "シューリンガンのグーリンダイ グーリンダイのポンポコピーのポンポコナーの 長久命の 長助" << endl;
+		cout << endl;
 	}
-	else {
-		std::u8string results_message = std::u8string(reinterpret_cast<const char8_t*>(std::to_string(filtered_data.size()).c_str())) + u8"件のデータがヒットしました。\n";
-		for (const auto& entry : filtered_data) {
-			printUtf8(u8"--------------------\n");
-			for (const auto& [key, value] : entry) {
-				std::u8string output = u8"" + std::u8string(key.begin(), key.end()) + u8": " + value + u8"\n";
-				printUtf8(output);
-			}
+	else
+	{
+		//絞り込んだ結果を表示
+		if (filtered_data.empty()) {
+			//該当するデータがない場合のメッセージ
+			std::u8string no_results_message = u8"該当するデータが見つかりませんでした、絞り込み検索を終了します。\n";
+			printUtf8(no_results_message);
+			printUtf8(u8"--------------------\n\n");
+
 		}
-		printUtf8(u8"--------------------\n\n");
+		else {
+			std::u8string results_message = std::u8string(reinterpret_cast<const char8_t*>(std::to_string(filtered_data.size()).c_str())) + u8"件のデータがヒットしました。\n";
+			for (const auto& entry : filtered_data) {
+				printUtf8(u8"--------------------\n");
+				for (const auto& [key, value] : entry) {
+					std::u8string output = u8"" + std::u8string(key.begin(), key.end()) + u8": " + value + u8"\n";
+					printUtf8(output);
+				}
+			}
+			printUtf8(u8"--------------------\n\n");
+		}
 	}
 }
 
@@ -112,12 +125,13 @@ void Search::Character_Classification(int number)
 		std::string str;
 		std::cin >> str;
 
-		for (int i = 0; i < 141; i++)
+		for (int i = 0; i < 144; i++)
 		{
 			if (str == data[i])
 			{
 				int a = i / 3;
 				str_search_term = prefecture[a];
+				jugemu_count = a;
 				with_data = true;
 				return;
 			}
