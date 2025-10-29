@@ -136,6 +136,8 @@
     <ClCompile Include="src\FilteredSearch.cpp" />
     <ClCompile Include="src\DataBuffer.cpp" />
     <ClCompile Include="src\information.cpp" />
+    <ClCompile Include="src\PopulationAnalysis.cpp" />
+    <ClCompile Include="src\PopulationData.cpp" />
     <ClCompile Include="src\search.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Team2OpenDataApp.cpp" />
@@ -145,6 +147,8 @@
     <ClInclude Include="src\FilteredSearch.h" />
     <ClInclude Include="src\DataBuffer.h" />
     <ClInclude Include="src\information.h" />
+    <ClInclude Include="src\PopulationAnalysis.h" />
+    <ClInclude Include="src\PopulationData.h" />
     <ClInclude Include="src\search.h" />
     <ClInclude Include="src\System.h" />
   </ItemGroup>

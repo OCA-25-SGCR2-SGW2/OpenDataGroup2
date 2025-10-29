@@ -31,7 +31,8 @@ void FavoritesList::ShowAllFavorites()const {
 	//絞り込んだ結果を表示
 	if (favorites_data_.empty()) {
 		//該当するデータがない場合のメッセージ
-		std::u8string no_results_message = u8"該当するデータが見つかりませんでした。\n";
+		printUtf8(u8"--------------------");
+		std::u8string no_results_message = u8"該当するデータが見つかりませんでした。";
 		printUtf8(no_results_message);
 		printUtf8(u8"--------------------\n\n");
 	}
@@ -48,4 +49,14 @@ void FavoritesList::ShowAllFavorites()const {
 		}
 		printUtf8(u8"--------------------\n\n");
 	}
+}
+//-----------------------------------------------------------------------------
+//! お気に入りデータを削除する関数
+//-----------------------------------------------------------------------------
+bool FavoritesList::DeleteFavorite(size_t index) {
+	if (index < favorites_data_.size()) {
+		favorites_data_.erase(favorites_data_.begin() + index);
+		return true;	//ここでリターンされるなら成功
+	}
+	return false;	//失敗
 }
