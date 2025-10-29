@@ -10,28 +10,26 @@
 ---
 
 ## ✨ 主な機能
-
+- 全国のレストラン検索
 - お気に入りデータの登録・編集・削除
-- UTF-8 文字列の安全な表示
-- cereal ライブラリを使った JSON シリアライズ／デシリアライズ
 - コマンドラインベースの簡易 UI
-![アプリのスクリーンショット](images/screenshot.png)
----
 
-## 🚀 インストール方法
+おまけ
+- 都道府県人口の表示
+- 人口の表示に隠しコマンドがあるかも…
+---
 
 ### 🔧 必要環境
 
-- C++20 対応のコンパイラ（例：g++, clang++, MSVC）
-- CMake（任意）
-- cereal ライブラリ（ヘッダオンリー）
+- C++20 対応のコンパイラ(u8stringを使用しているため。)
+- cereal ライブラリ（ヘッダオンリー）※本リポジトリに同梱済みのため、別途インストール不要
 
 ### 📦 セットアップ手順
 
 ```bash
 # リポジトリをクローン
 git clone https://github.com/yourname/Team2OpenDataApp.git
-cd Team2OpenDataApp
+cd OpenDataGroup2
 
 # ビルド（CMakeを使う場合）
 mkdir build && cd build
