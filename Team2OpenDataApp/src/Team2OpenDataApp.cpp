@@ -63,7 +63,7 @@ int main()
 			std::string str_store_name;
 			std::cin >> str_store_name;
 			//UTF-8文字列に変換
-			std::u8string u8_store_name(reinterpret_cast<const char8_t*>(str_store_name.c_str()));
+			std::u8string u8_store_name = ToU8String(str_store_name);
 			std::vector<std::unordered_map<std::string, std::u8string>> restaurant_data = DataBuffer::GetRestaurantData();			//データバッファからrestaurantのデータを取得
 			std::vector<std::unordered_map<std::string, std::u8string>> fav_data = favavorites_list.GetFavoritesData();				//お気に入りデータを取得
 			bool found = false;//見つかったかどうかのフラグ
@@ -123,11 +123,12 @@ int main()
 				}
 				else {
 					printUtf8(u8"--------------------");
-					std::u8string results_message = u8"お気に入りは" + std::u8string(reinterpret_cast<const char8_t*>(std::to_string(fav_data.size()).c_str())) + u8"件あります。";
+					std::u8string results_message = u8"お気に入りは" + ToU8String(std::to_string(fav_data.size())) + u8"件あります。";
 					printUtf8(results_message);
 					for (const auto& entry : fav_data) {
 						printUtf8(u8"--------------------\n");
-						printUtf8(u8"番号: " + std::u8string(reinterpret_cast<const char8_t*>(std::to_string(&entry - &fav_data[0] + 1).c_str())) + u8"\n");
+						std::u8string results_message = u8"番号: " + ToU8String(std::to_string(&entry - &fav_data[0] + 1)) + u8"\n";
+						printUtf8(results_message);
 						for (const auto& [key, value] : entry) {
 							std::u8string output = u8"" + std::u8string(key.begin(), key.end()) + u8": " + value + u8"\n";
 							printUtf8(output);
@@ -148,7 +149,7 @@ int main()
 					}
 					std::cin.clear();
 					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-					std::u8string error_message = u8"無効な番号です。1から" + std::u8string(reinterpret_cast<const char8_t*>(std::to_string(fav_data_size).c_str())) + u8"の数字を入力してください。\n終了する:-1";
+					std::u8string error_message = u8"無効な番号です。1から" + ToU8String(std::to_string(fav_data_size)) + u8"の数字を入力してください。\n終了する:-1";
 					printUtf8(error_message);
 					std::cin >> delete_idx;
 				}

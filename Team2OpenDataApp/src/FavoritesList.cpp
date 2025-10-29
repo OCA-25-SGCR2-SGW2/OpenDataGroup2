@@ -10,8 +10,8 @@
 #include <cereal/types/string.hpp>        // string型のシリアライズをサポート
 #include <cereal/types/vector.hpp>        // vector型のシリアライズをサポート
 #include <cereal/types/unordered_map.hpp>   // unordered_map型のシリアライズをサポート
-#include "FavoritesList.h"
 #include "System.h"
+#include "FavoritesList.h"
 //-----------------------------------------------------------------------------
 //!	お気に入りデータを追加する関数
 //-----------------------------------------------------------------------------
@@ -38,7 +38,7 @@ void FavoritesList::ShowAllFavorites()const {
 	}
 	else {
 		printUtf8(u8"--------------------");
-		std::u8string results_message = u8"お気に入りは" + std::u8string(reinterpret_cast<const char8_t*>(std::to_string(favorites_data_.size()).c_str())) + u8"件あります。";
+		std::u8string results_message = u8"お気に入りは" + ToU8String(std::to_string(favorites_data_.size())) + u8"件あります。";	
 		printUtf8(results_message);
 		for (const auto& entry : favorites_data_) {
 			printUtf8(u8"--------------------\n");

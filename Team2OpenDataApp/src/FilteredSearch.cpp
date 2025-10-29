@@ -45,7 +45,7 @@ void processFilteredSearch() {
 		std::string str_search_term;
 		std::cin >> str_search_term;
 		//UTF-8文字列に変換
-		std::u8string u8_search_term(reinterpret_cast<const char8_t*>(str_search_term.c_str()));
+		std::u8string u8_search_term = ToU8String(str_search_term);
 		//削除を行うので、逆順イテレータ
 		for (int i = static_cast<int>(filtered_data.size()) - 1; i >= 0; --i) {
 			//文字列が一致するかを検索して
@@ -63,7 +63,7 @@ void processFilteredSearch() {
 			break;
 		}
 		else {
-			std::u8string results_message = std::u8string(reinterpret_cast<const char8_t*>(std::to_string(filtered_data.size()).c_str())) + u8"件のデータがヒットしました。\n";
+			std::u8string results_message = ToU8String(std::to_string(filtered_data.size())) + u8"件のデータがヒットしました。\n";
 			printUtf8(results_message);
 			for (const auto& entry : filtered_data) {
 				printUtf8(u8"--------------------\n");
