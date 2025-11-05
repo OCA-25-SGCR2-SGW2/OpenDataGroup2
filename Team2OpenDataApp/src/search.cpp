@@ -85,7 +85,7 @@ void Search::DetailedInput(int number)
 	}
   
 	//じゅげむ検索
-	if (jugemu_count == 4)
+	if (jugemu_count == 47)
 	{
 		cout << endl;
 		cout << "じゅげむ じゅげむ ごこうのすりきれ かいじゃりすいぎょの すいぎょうまつ うんらいまつ ふうらいまつ くうねるところに " << endl;
