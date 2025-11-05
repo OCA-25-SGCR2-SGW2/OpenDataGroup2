@@ -33,7 +33,9 @@ void Search::Updat() {
 	std::cin >> search_number;//番号を入力
 	//不正な入力の処理
 	while (search_number > data_keys.size()) {
-		std::cout << "不正な入力です。正しい値を入力してください。\n\n";
+		printf("\x1b[41m\n");
+		std::cout << "不正な入力です。正しい値を入力してください。";
+		printf("\x1b[49m\n");
 		SearchiInput();//案内表示
 		std::cin >> search_number;//番号を入力
 	}
@@ -67,7 +69,10 @@ void Search::DetailedInput(int number)
 	Character_Classification(number);
 	while (!with_data)
 	{
-		std::cout << "不正な入力です。正しい値を入力してください。\n";
+		printf("\x1b[41m\n");
+		std::cout << "不正な入力です。正しい値を入力してください。";
+		printf("\x1b[49m\n");
+		cout << endl;
 		Character_Classification(number);
 	}
 
@@ -88,11 +93,17 @@ void Search::DetailedInput(int number)
 	if (jugemu_count == 47)
 	{
 		cout << endl;
+		printf("\x1b[41m\n");
 		cout << "じゅげむ じゅげむ ごこうのすりきれ かいじゃりすいぎょの すいぎょうまつ うんらいまつ ふうらいまつ くうねるところに " << endl;
+		printf("\x1b[42m\n");
 		cout << "すむところ やぶらこうじの ぶらこうじ パイポパイポ パイポのシューリンガン シューリンガンのグーリンダイ" << endl;
+		printf("\x1b[43m\n");
 		cout << "グーリンダイのポンポコピーのポンポコナーの ちょうきゅうめいの ちょうすけ 寿限無 寿限無 五却のすりきれ 海砂利水魚の" << endl;
+		printf("\x1b[44m\n");
 		cout << "水行末 雲来末 風来末 食う寝る処に住む処 藪ら柑子の藪柑子 パイポパイポ パイポのシューリンガン " << endl;
+		printf("\x1b[45m\n");
 		cout << "シューリンガンのグーリンダイ グーリンダイのポンポコピーのポンポコナーの 長久命の 長助" << endl;
+		printf("\x1b[49m\n");
 		cout << endl;
 	}
 	else
