@@ -139,6 +139,7 @@
     <ClCompile Include="src\PopulationAnalysis.cpp" />
     <ClCompile Include="src\PopulationData.cpp" />
     <ClCompile Include="src\search.cpp" />
+    <ClCompile Include="src\StationCoverageAnalysis.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Team2OpenDataApp.cpp" />
   </ItemGroup>
@@ -150,6 +151,7 @@
     <ClInclude Include="src\PopulationAnalysis.h" />
     <ClInclude Include="src\PopulationData.h" />
     <ClInclude Include="src\search.h" />
+    <ClInclude Include="src\StationCoverageAnalysis.h" />
     <ClInclude Include="src\System.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -10,6 +10,7 @@
     <ClCompile Include="src\Team2OpenDataApp.cpp" />
     <ClCompile Include="src\PopulationData.cpp" />
     <ClCompile Include="src\PopulationAnalysis.cpp" />
+    <ClCompile Include="src\StationCoverageAnalysis.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FavoritesList.h" />
@@ -20,5 +21,6 @@
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\PopulationData.h" />
     <ClInclude Include="src\PopulationAnalysis.h" />
+    <ClInclude Include="src\StationCoverageAnalysis.h" />
   </ItemGroup>
 </Project>

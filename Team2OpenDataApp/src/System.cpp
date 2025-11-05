@@ -24,3 +24,9 @@ std::u8string ToU8String(const std::string& str) {
 std::string ToString(const std::u8string& u8str) {
 	return std::string(u8str.begin(), u8str.end());
 }
+//-----------------------------------------------------------------------------
+//! @brief	UTF-8で文字列を表示する関数（改行なし）
+//-----------------------------------------------------------------------------
+void printUtf8NoNewline(const std::u8string& str) {
+	std::cout << ToString(str);  // endlを付けない
+}

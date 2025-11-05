@@ -15,6 +15,7 @@
 #include "FilteredSearch.h"
 #include "FavoritesList.h"
 #include "search.h"
+#include "StationCoverageAnalysis.h" // 追加
 
 int main()
 {
@@ -37,7 +38,7 @@ int main()
 		ShowInformation("option_info");//案内表示
 		int option;
 		std::cin >> option;
-		while ((option > 8 || option < 1) || std::cin.fail()) {
+		while ((option > 9 || option < 1) || std::cin.fail()) { // 最大値を9に変更
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "不正な入力です。正しい値を入力してください。\n\n";
@@ -205,8 +206,11 @@ int main()
 			//人口比率分析
 			PopulationAnalysis::DisplayPopulationRatioAnalysis();
 			break;
-			break;
 		case 8:
+			// 駅名カバー率ランキング
+			StationCoverageAnalysis::DisplayStationCoverageRanking();
+			break;
+		case 9:
 			//終了
 			return 0;
 			break;
