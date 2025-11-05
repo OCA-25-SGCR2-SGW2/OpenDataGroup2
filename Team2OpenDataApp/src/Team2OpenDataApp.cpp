@@ -23,27 +23,27 @@ int main()
 	DataBuffer::Init();//データバッファを初期化
 	PopulationData::Init();//人口データを初期化
 	//お気に入りリストの宣言
-	FavoritesList favavorites_list;
+	FavoritesList favorites_list;
 	{
-		std::ifstream is("Data/FavoritesList.json"); // 入力ファイルストリームを開く
+		std::ifstream is(FavoritesList::FILE_PATH); // 入力ファイルストリームを開く
 		// ファイルが空なら処理を行わない
 		if (!(is.peek() == std::ifstream::traits_type::eof())) {
 			cereal::JSONInputArchive archive(is); // JSON形式のアーカイブを作成
-			archive(favavorites_list); // データをデシリアライズして読み込む
+			archive(favorites_list); // データをデシリアライズして読み込む
 		}
 	}
 	Search search;//通常検索クラスのインスタンスを生成
 	while (true) {
 		ShowInformation("option_info");//案内表示
-		int option;
-		std::cin >> option;
-		while ((option > 8 || option < 1) || std::cin.fail()) {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "不正な入力です。正しい値を入力してください。\n\n";
+		int option = 0;
+		// 不正入力時に再度案内を表示するコールバック
+		auto callback_invalid = []() {
 			ShowInformation("option_info");//案内表示
-			std::cin >> option;
-		}
+			};
+		// 入力を取得（範囲は 1〜8）
+		option = GetValidNum(1, 8,
+			u8"不正な入力です。1から8の数字を入力してください。\n\n",
+			callback_invalid);
 		switch (option) {
 		case 1:
 			//検索
@@ -60,12 +60,9 @@ int main()
 			//店名でブックマーク
 		{
 			ShowInformation("bookmark_input_info");//案内表示
-			std::string str_store_name;
-			std::cin >> str_store_name;
-			//UTF-8文字列に変換
-			std::u8string u8_store_name = ToU8String(str_store_name);
-			std::vector<std::unordered_map<std::string, std::u8string>> restaurant_data = DataBuffer::GetRestaurantData();			//データバッファからrestaurantのデータを取得
-			std::vector<std::unordered_map<std::string, std::u8string>> fav_data = favavorites_list.GetFavoritesData();				//お気に入りデータを取得
+			std::u8string u8_store_name = ReadLineUtf8();//店名をUTF-8で入力
+			domain::RestaurantData restaurant_data = DataBuffer::GetRestaurantData();			//データバッファからrestaurantのデータを取得
+			domain::RestaurantData fav_data = favorites_list.GetFavoritesData();				//お気に入りデータを取得
 			bool found = false;//見つかったかどうかのフラグ
 			for (const auto& entry : restaurant_data) {
 				//店名が一致するしていたら
@@ -87,13 +84,9 @@ int main()
 						break;
 					}
 					//見つかったらお気に入りリストに追加
-					favavorites_list.AddFavorite(entry);
+					favorites_list.AddFavorite(entry);
 					//お気に入りリストの保存
-					{
-						std::ofstream os("Data/FavoritesList.json"); // ファイルに書き込む
-						cereal::JSONOutputArchive archive(os);
-						archive(favavorites_list); // オブジェクトを保存
-					}
+					favorites_list.Save();
 					std::u8string success_message = entry.at("store_name") + u8"をブックマークに追加しました。\n";
 					printUtf8(success_message);
 					break;
@@ -109,7 +102,7 @@ int main()
 			//ブックマークの削除
 		{
 			while (true) {
-				auto fav_data = favavorites_list.GetFavoritesData();//お気に入り情報を取得
+				auto fav_data = favorites_list.GetFavoritesData();//お気に入り情報を取得
 				//番号付きで表示
 				size_t fav_data_size = fav_data.size();//お気に入りデータの個数
 				//絞り込んだ結果を表示
@@ -137,38 +130,24 @@ int main()
 					printUtf8(u8"--------------------\n\n");
 				}
 				ShowInformation("bookmark_delete_info");//案内表示
-				bool exit_flag = false;//削除処理を終了するかどうかのフラグ
-				size_t delete_idx;
-				std::cin >> delete_idx;
-				//例外処理
-				while ((delete_idx < 1 || delete_idx > fav_data_size) || std::cin.fail()) {
-					//-1なら終了したい
-					if (delete_idx == -1) {
-						exit_flag = true;//削除処理を終了する。
-						break;
-					}
-					std::cin.clear();
-					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-					std::u8string error_message = u8"無効な番号です。1から" + ToU8String(std::to_string(fav_data_size)) + u8"の数字を入力してください。\n終了する:-1";
-					printUtf8(error_message);
-					std::cin >> delete_idx;
-				}
-				//削除処理を終了するなら抜ける
-				if (exit_flag) {
+				int delete_idx = GetValidNum(
+								0, static_cast<int>(fav_data_size),
+								u8"無効な番号です。0から" + ToU8String(std::to_string(fav_data_size)) +
+								u8"の数字を入力してください。\n終了する:0",
+								[]() { ShowInformation("bookmark_delete_info"); } // 不正入力時に再表示
+				);
+				// 0 が入力されたら終了
+				if (delete_idx == 0) {
 					printUtf8(u8"--------------------");
-					std::u8string exit_message = u8"-1が入力されました。\nブックマーク削除オプションを終了します。";
+					std::u8string exit_message = u8"0が入力されました。\nブックマーク削除オプションを終了します。";
 					printUtf8(exit_message);
 					printUtf8(u8"--------------------\n\n");
 					break;
 				}
 				//対応するデータを削除
-				if (favavorites_list.DeleteFavorite(delete_idx - 1)) {
+				if (favorites_list.DeleteFavorite(delete_idx - 1)) {//0は除外済み
 					//お気に入りリストの保存
-					{
-						std::ofstream os("Data/FavoritesList.json"); // ファイルに書き込む
-						cereal::JSONOutputArchive archive(os);
-						archive(favavorites_list); // オブジェクトを保存
-					}
+					favorites_list.Save();
 					std::u8string success_message = u8"指定された番号のブックマークを削除しました。\n";
 					printUtf8(success_message);
 				}
@@ -179,16 +158,8 @@ int main()
 				//もう一度削除するかどうかを確認
 				std::u8string prompt_message = u8"別の項目も削除しますか？\n削除する:0\n終わる:1";
 				printUtf8(prompt_message);
-				int continue_option;
-				std::cin >> continue_option;
-				//例外処理
-				while ((continue_option < 0 || continue_option > 1) || std::cin.fail()) {
-					std::cin.clear();
-					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-					std::u8string error_message = u8"無効なオプションです。0か1の数字を入力してください。\n削除する:0\n終わる:1";
-					printUtf8(error_message);
-					std::cin >> continue_option;
-				}
+				int continue_option = GetValidNum(0, 1,
+					u8"無効なオプションです。0か1を入力してください。\n削除する:0\n終わる:1");
 				//1ならループを抜ける
 				if (continue_option == 1) {
 					break;
@@ -199,12 +170,11 @@ int main()
 		break;
 		case 6:
 			//ブックマークの表示
-			favavorites_list.ShowAllFavorites();	//お気に入りを表示
+			favorites_list.ShowAllFavorites();	//お気に入りを表示
 			break;
 		case 7:
 			//人口比率分析
 			PopulationAnalysis::DisplayPopulationRatioAnalysis();
-			break;
 			break;
 		case 8:
 			//終了
@@ -213,6 +183,8 @@ int main()
 		}
 	}
 
-	system("pause");
+	std::cout << "Press Enter to continue...";
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.get();
 	return 0;
 }

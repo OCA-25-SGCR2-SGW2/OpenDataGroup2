@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------------
 #include <vector>
 #include <unordered_map>
+#include "Types.h"
 //-----------------------------------------------------------------------------
 //	データのバッファクラス
 //-----------------------------------------------------------------------------
@@ -16,14 +17,14 @@ public:
 	//!	@brief	レストランデータを取得する関数
 	//! @return	restaurantのデータを格納したバッファ
 	//-----------------------------------------------------------------------------
-	static std::vector<std::unordered_map<std::string, std::u8string>> GetRestaurantData() { return restaurant__data_; };
+	static const domain::RestaurantData& GetRestaurantData() { return restaurant_data_; };
 	//-----------------------------------------------------------------------------
 	//!	@brief	データのキー一覧を取得する関数
 	//! @return	データのキーを格納したバッファ
 	//-----------------------------------------------------------------------------
-	static std::vector<std::string> GetDataKeys() { return data_keys_; };
+	static const std::vector<std::string>& GetDataKeys() { return data_keys_; };
 
 private:
-	static std::vector<std::unordered_map<std::string, std::u8string>> restaurant__data_;//restaurantのデータを格納したバッファ
+	static domain::RestaurantData restaurant_data_;//restaurantのデータを格納したバッファ
 	static std::vector<std::string> data_keys_;//データのキー一覧
 };

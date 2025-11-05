@@ -20,5 +20,6 @@
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\PopulationData.h" />
     <ClInclude Include="src\PopulationAnalysis.h" />
+    <ClInclude Include="src\Types.h" />
   </ItemGroup>
 </Project>

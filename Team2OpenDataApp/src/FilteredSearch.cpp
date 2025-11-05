@@ -7,15 +7,17 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <algorithm>
 #include "System.h"
 #include "information.h"
 #include "DataBuffer.h"
+#include "FilteredSearch.h"
 //----------------------------------------------------------------------------------------
 //	絞り込み検索を行う一連の処理
 //----------------------------------------------------------------------------------------
 void processFilteredSearch() {
 	//データのバッファから絞り込むデータを取得
-	std::vector<std::unordered_map<std::string, std::u8string>> filtered_data = DataBuffer::GetRestaurantData();
+	domain::RestaurantData filtered_data = DataBuffer::GetRestaurantData();
 	//データのキー一覧を取得
 	std::vector<std::string> data_keys = DataBuffer::GetDataKeys();
 	while (true)
@@ -24,36 +26,25 @@ void processFilteredSearch() {
 		ShowInformation("filtered_search_info");//案内表示
 		//ユーザーからの入力を取得
 		int option = 0;
-		std::cin >> option;
-		//ここで10が入力されたらループを終了
-		if (option == 10) {
+		// 範囲を動的にメッセージに反映
+		std::u8string error_message = ToU8String("無効なオプションです。1から" + std::to_string(data_keys.size()) + "の数字を入力してください。\n");
+		//不正な入力があった場合のコールバック関数
+		auto callback_invalid = []() {
+			ShowInformation("filtered_search_info");//案内表示
+			};
+		option = GetValidNum(1, static_cast<int>(data_keys.size()) + 1, error_message, callback_invalid);//オプションを入力
+		//ここでサイズ+1の値が入力されたらループを終了
+		if (option == static_cast<int>(data_keys.size()) + 1) {
 			break;
-		}
-		//例外処理
-		while ((option < 1 || option > 9) || std::cin.fail()) {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::u8string error_message = u8"無効なオプションです。1から9の数字を入力してください。\n";
-			printUtf8(error_message);
-			std::cin >> option;
 		}
 		//対応するデータキーを取得
 		std::string selected_key = data_keys[option - 1];
 		//ユーザーに検索文字列の入力を促す
 		std::u8string prompt_message = u8"検索したい文字列を入力してください:\n";
-		printUtf8(prompt_message);
-		std::string str_search_term;
-		std::cin >> str_search_term;
-		//UTF-8文字列に変換
-		std::u8string u8_search_term = ToU8String(str_search_term);
-		//削除を行うので、逆順イテレータ
-		for (int i = static_cast<int>(filtered_data.size()) - 1; i >= 0; --i) {
-			//文字列が一致するかを検索して
-			if (filtered_data[i][selected_key].find(u8_search_term) == std::u8string::npos) {
-				//なければ削除
-				filtered_data.erase(filtered_data.begin() + i);
-			}
-		}
+		//UTF-8文字列を入力
+		std::u8string u8_search_term = ReadLineUtf8(prompt_message);
+		// データを絞り込み
+		filtered_data = FilterData(filtered_data, selected_key, u8_search_term);
 		//絞り込んだ結果を表示
 		if (filtered_data.empty()) {
 			//該当するデータがない場合のメッセージ
@@ -63,8 +54,10 @@ void processFilteredSearch() {
 			break;
 		}
 		else {
+			//ヒットしたデータ数を表示
 			std::u8string results_message = ToU8String(std::to_string(filtered_data.size())) + u8"件のデータがヒットしました。\n";
 			printUtf8(results_message);
+			//データの表示
 			for (const auto& entry : filtered_data) {
 				printUtf8(u8"--------------------\n");
 				for (const auto& [key, value] : entry) {
@@ -75,5 +68,16 @@ void processFilteredSearch() {
 			printUtf8(u8"--------------------\n\n");
 		}
 	}
-
+}
+//----------------------------------------------------------------------------------------
+//! データを絞り込む関数
+//----------------------------------------------------------------------------------------
+domain::RestaurantData FilterData(const domain::RestaurantData& data, const std::string& key, const std::u8string& term) {
+	domain::RestaurantData result;
+	std::copy_if(data.begin(), data.end(), std::back_inserter(result),
+		[&](const auto& entry) {
+			auto it = entry.find(key);
+			return it != entry.end() && it->second.find(term) != std::u8string::npos;
+		});
+	return result;
 }
