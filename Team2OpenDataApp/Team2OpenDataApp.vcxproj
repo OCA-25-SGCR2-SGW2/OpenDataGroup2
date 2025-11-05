@@ -151,6 +151,7 @@
     <ClInclude Include="src\PopulationData.h" />
     <ClInclude Include="src\search.h" />
     <ClInclude Include="src\System.h" />
+    <ClInclude Include="src\Types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

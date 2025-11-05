@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <fstream>
 #include <cereal/archives/json.hpp>       // JSON形式のアーカイブ
 #include <cereal/types/string.hpp>        // string型のシリアライズをサポート
 #include <cereal/types/vector.hpp>        // vector型のシリアライズをサポート
@@ -21,7 +22,7 @@ void FavoritesList::AddFavorite(const std::unordered_map<std::string, std::u8str
 //-----------------------------------------------------------------------------
 //!	お気に入りデータを取得する関数
 //-----------------------------------------------------------------------------
-std::vector<std::unordered_map<std::string, std::u8string>> FavoritesList::GetFavoritesData() const {
+domain::RestaurantData FavoritesList::GetFavoritesData() const {
 	return favorites_data_;
 }
 //-----------------------------------------------------------------------------
@@ -38,7 +39,7 @@ void FavoritesList::ShowAllFavorites()const {
 	}
 	else {
 		printUtf8(u8"--------------------");
-		std::u8string results_message = u8"お気に入りは" + ToU8String(std::to_string(favorites_data_.size())) + u8"件あります。";	
+		std::u8string results_message = u8"お気に入りは" + ToU8String(std::to_string(favorites_data_.size())) + u8"件あります。";
 		printUtf8(results_message);
 		for (const auto& entry : favorites_data_) {
 			printUtf8(u8"--------------------\n");
@@ -59,4 +60,14 @@ bool FavoritesList::DeleteFavorite(size_t index) {
 		return true;	//ここでリターンされるなら成功
 	}
 	return false;	//失敗
+}
+//-----------------------------------------------------------------------------
+// お気に入りリストをファイルに保存する関数
+//! @param path [in] 保存先のファイルパス（省略可能、デフォルトはFILE_PATH）
+//-----------------------------------------------------------------------------
+void FavoritesList::Save(const std::string& path) const {
+	std::ofstream os(path); // ファイルに書き込む
+	cereal::JSONOutputArchive archive(os);
+	archive(*this); // オブジェクトを保存
+
 }

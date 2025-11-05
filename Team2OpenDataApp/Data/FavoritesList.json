@@ -1,44 +1,5 @@
 {
     "value0": {
-        "favorites_data_": [
-            [
-                {
-                    "key": "store_name",
-                    "value": "ブタキング"
-                },
-                {
-                    "key": "genre",
-                    "value": "ラーメン・つけ麺"
-                },
-                {
-                    "key": "prefecture",
-                    "value": "北海道"
-                },
-                {
-                    "key": "street",
-                    "value": "大麻中町50"
-                },
-                {
-                    "key": "url",
-                    "value": ""
-                },
-                {
-                    "key": "city",
-                    "value": "江別市"
-                },
-                {
-                    "key": "building",
-                    "value": ""
-                },
-                {
-                    "key": "station",
-                    "value": "大麻"
-                },
-                {
-                    "key": "phone_number",
-                    "value": "0113875767"
-                }
-            ]
-        ]
+        "favorites_data_": []
     }
 }

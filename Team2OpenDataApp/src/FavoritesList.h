@@ -4,6 +4,7 @@
 //! @brief	お気に入りリスト(ブックマーク)
 //! @author 山﨑愛
 //----------------------------------------------------------------------------------------
+#include "Types.h"
 class FavoritesList {
 public:
 	//-----------------------------------------------------------------------------
@@ -16,7 +17,7 @@ public:
 	// お気に入りデータを取得する関数
 	//! @return お気に入りデータ
 	//-----------------------------------------------------------------------------
-	std::vector<std::unordered_map<std::string, std::u8string>> GetFavoritesData()const;
+	domain::RestaurantData GetFavoritesData()const;
 
 	//-----------------------------------------------------------------------------
 	// お気に入りデータをすべて見せる関数
@@ -29,6 +30,12 @@ public:
 	//! @return 成功したらtrue、失敗したらfalse
 	//-----------------------------------------------------------------------------
 	bool DeleteFavorite(size_t index);
+
+	//-----------------------------------------------------------------------------
+	// お気に入りリストをファイルに保存する関数
+	//! @param path [in] 保存先のファイルパス（省略可能、デフォルトはFILE_PATH）
+	//-----------------------------------------------------------------------------
+	void Save(const std::string& path = FILE_PATH) const;
 
 	//-----------------------------------------------------------------------------
 	//	cereal用のセーブ処理用関数
@@ -76,5 +83,7 @@ public:
 		}
 	}
 private:
-	std::vector<std::unordered_map<std::string, std::u8string>> favorites_data_;//お気に入りのデータを格納したバッファ
+	domain::RestaurantData favorites_data_;//お気に入りのデータを格納したバッファ
+public:
+	static constexpr const char* FILE_PATH = "Data/FavoritesList.json";//お気に入りリストの保存先ファイルパス
 };

@@ -5,6 +5,7 @@
 //----------------------------------------------------------------------------------------
 #include <iostream>
 #include <vector>
+#include <string>
 #include <unordered_map>
 #include <set>
 #include "System.h"
@@ -53,15 +54,15 @@ void processSearchListDisplay() {
 	ShowInformation("search_list_info");//案内表示
 	auto data_keys = DataBuffer::GetDataKeys();//データのキー一覧を取得
 	int data_key_idx = 0;//データキーのインデックス番号
-	std::cin >> data_key_idx;//番号を入力
-	//入力が不正な場合、再度入力を促す
-	while ((data_key_idx > data_keys.size() || data_key_idx < 1) || std::cin.fail()) {
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "不正な入力です。正しい値を入力してください。\n\n";
+	// 範囲を動的にメッセージに反映
+	std::u8string error_message = ToU8String(
+		"不正な入力です。1~" + std::to_string(data_keys.size()) + " の値を入力してください。\n\n"
+	);
+	//不正な入力のコールバック関数
+	auto callback_invalid = []() {
 		ShowInformation("search_list_info");//案内表示
-		std::cin >> data_key_idx;//番号を入力
-	}
+		};
+	data_key_idx = GetValidNum(1, static_cast<int>(data_keys.size()), error_message, callback_invalid);
 	data_key_idx--;//配列のインデックスに合わせるために-1する
 	//一覧表示
 	ShowSearchSuggestions(data_keys[data_key_idx]);//一覧の表示

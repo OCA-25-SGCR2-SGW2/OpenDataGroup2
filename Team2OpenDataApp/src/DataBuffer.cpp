@@ -9,7 +9,7 @@
 #include <sstream>
 #include "DataBuffer.h"
 //staticメンバ変数を初期化
-std::vector<std::unordered_map<std::string, std::u8string>> DataBuffer::restaurant__data_ = {};
+domain::RestaurantData DataBuffer::restaurant_data_ = {};
 std::vector<std::string> DataBuffer::data_keys_ = { "store_name", "prefecture", "city", "street", "building", "station", "phone_number", "genre", "url" };
 //-----------------------------------------------------------------------------
 //	初期化関数
@@ -60,7 +60,7 @@ void DataBuffer::Init() {
 				break;
 			}
 		}
-		restaurant__data_.push_back(curr_line_data);//バッファに格納
+		restaurant_data_.push_back(curr_line_data);//バッファに格納
 	}
 
 	file.close(); // ファイルを閉じる
